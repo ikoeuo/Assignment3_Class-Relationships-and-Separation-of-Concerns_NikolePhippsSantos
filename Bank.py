@@ -33,7 +33,7 @@ class Account:
 
 class SavingsAccount:
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
-        self.currentBalance = 0
+        self.currentBalance = currentBalance
         self.minimumBalance = minimumBalance 
     def withdraw(self, amount):
         self.currentBalance = amount
@@ -51,7 +51,7 @@ class SavingsAccount:
 
 class ChecquingAccount:
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftAllowed):
-            self.currentBalance = 0
+            self.currentBalance = currentBalance
             self.overdraftAllowed = overdraftAllowed
     def withdraw(self, amount):
         self.currentBalance = amount
@@ -81,3 +81,5 @@ class Bank:
         for account in self.accounts:
             if Account.getAccountNumber == accountNumber:
                 return account
+            else:
+                print(f'Account does not exist.')

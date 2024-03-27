@@ -13,10 +13,12 @@ def run():
     bank = 'RBC'
 
     while True:
+
         showMainMenu()
         option = (input('Enter choice (1-3): '))
         
-        if option == 1:
+        if option == 1: #Open Account
+
             accountType = input('Enter account type (savings/checquing): ').lower()
             accountNumber = int(input ('Enter account number: '))
             accountHolder = str(input('Enter account holder name: '))
@@ -24,12 +26,43 @@ def run():
             initialBalance = float(input('Enter initial balance to deposit'))
 
             if accountType == 'savings':
+                account = SavingsAccount(accountNumber, accountHolder, rateOfInterest, initialBalance , SavingsAccount.minimumBalance)
+                #Account Number: {accountNumber}, Account Holder: {accountHolder}, Rate Of Interest: {rateOfInterest}, Current Balance: {Bank.currentBalance}, Minimum Balance:{minimumBalance}
 
-        elif option ==2:
-            pass
+            elif accountType == 'checquing':
+                account = ChecquingAccount(accountNumber, accountHolder, rateOfInterest, initialBalance , ChecquingAccount.overdraftAllowed)
 
-        elif option == 3:
-            pass
+            else:
+                print('Unable to open account, Invalid account type.')
+
+            Bank.openAccount(account)
+
+        elif option == 2: #2. Select account
+
+            accountNumber = input('Enter Account Number: ')
+            Bank.searchAccount
+            if accountNumber is account:
+                while True:
+                    showAccountMenu()
+                    accountOption = print(input('Enter selection (1-4): '))
+
+                    if accountOption == 1: #Check Balance
+                        print('Your current balance is: ')
+                        Account.getCurrentBalance() 
+
+                    elif accountOption == 2: #2. Deposit
+                        amount = print(float(input('How much money would you like to deposit? ')))
+                        Account.deposit(amount)
+
+                    elif accountOption == 3: #3. Withdraw
+                        amount = print(float(input('How much money would you like to withdraw? ')))
+                        Account.withdraw(amount)
+
+                    elif accountOption == 4: #4. Exit Account to Main Menu
+                        break
+
+        elif option == 3: #3. Exit
+            print('Thank you for using my app!')
 
         else:
-            pass
+            print('Invalid Selection')
