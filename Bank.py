@@ -32,11 +32,11 @@ class Account:
             print('Invalid deposit amount')
 
 class SavingsAccount:
-    def __init__(self):
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
         self.currentBalance = 0
+        self.minimumBalance = minimumBalance 
     def withdraw(self, amount):
         self.currentBalance = amount
-        self.minimumBalance = 1000
         self.currentBalance -= amount
 
         if self.currentBalance < self.minimumBalance:
@@ -50,11 +50,11 @@ class SavingsAccount:
             print('Error please try again.')
 
 class ChecquingAccount:
-    def __init__(self):
+    def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftAllowed):
             self.currentBalance = 0
+            self.overdraftAllowed = overdraftAllowed
     def withdraw(self, amount):
         self.currentBalance = amount
-        self.overdraftAllowed = -50
         self.currentBalance -= amount
 
         if self.currentBalance < self.overdraftAllowed:
