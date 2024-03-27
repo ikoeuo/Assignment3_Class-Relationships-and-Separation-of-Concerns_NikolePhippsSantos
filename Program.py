@@ -10,38 +10,38 @@ def showAccountMenu():
     print('What would you like to do?\n1. Check Balance\n2. Deposit\n3. Withdraw\n4. Exit Account to Main Menu')
 
 def run():
-    bank = 'RBC'
+    bankName = 'RBC'
 
     while True:
 
         showMainMenu()
-        option = (input('Enter choice (1-3): '))
+        option = int(input('Enter choice (1-3): '))
         
         if option == 1: #Open Account
 
             accountType = input('Enter account type (savings/checquing): ').lower()
             accountNumber = int(input ('Enter account number: '))
             accountHolder = str(input('Enter account holder name: '))
-            rateOfInterest = float(input('Enter rate of interest: '))
-            initialBalance = float(input('Enter initial balance to deposit'))
+            rateOfInterest = float(input('Enter rate of interest: %'))
+            initialBalance = float(input('Enter initial balance to deposit: '))
 
             if accountType == 'savings':
-                account = SavingsAccount(accountNumber, accountHolder, rateOfInterest, initialBalance , SavingsAccount.minimumBalance)
-                #Account Number: {accountNumber}, Account Holder: {accountHolder}, Rate Of Interest: {rateOfInterest}, Current Balance: {Bank.currentBalance}, Minimum Balance:{minimumBalance}
-
+                minimumBalance = 1000
+                account = Bank.openSavingsAccount(bankName, accountNumber, accountHolder, rateOfInterest, initialBalance , minimumBalance)   
+                
             elif accountType == 'checquing':
-                account = ChecquingAccount(accountNumber, accountHolder, rateOfInterest, initialBalance , ChecquingAccount.overdraftAllowed)
-
+                overdraftAllowed= -100
+                account = Bank.openChequingAccount(bankName, accountNumber, accountHolder, rateOfInterest, initialBalance , overdraftAllowed)
+                
             else:
                 print('Unable to open account, Invalid account type.')
 
-            Bank.openAccount(account)
 
         elif option == 2: #2. Select account
 
             accountNumber = input('Enter Account Number: ')
             Bank.searchAccount
-            if accountNumber is account:
+            if Bank.searchAccount == accountNumber:
                 while True:
                     showAccountMenu()
                     accountOption = print(input('Enter selection (1-4): '))
@@ -56,13 +56,23 @@ def run():
 
                     elif accountOption == 3: #3. Withdraw
                         amount = print(float(input('How much money would you like to withdraw? ')))
-                        Account.withdraw(amount)
+                        if accountType == 'savings':
+                            SavingsAccount.withdraw(amount)
+                        elif accountType == 'checquing':
+                            ChecquingAccount.withdraw(amount)
 
                     elif accountOption == 4: #4. Exit Account to Main Menu
                         break
 
+                    else:
+                        print('404')
+    
         elif option == 3: #3. Exit
             print('Thank you for using my app!')
+            exit()
 
         else:
             print('Invalid Selection')
+
+
+run()

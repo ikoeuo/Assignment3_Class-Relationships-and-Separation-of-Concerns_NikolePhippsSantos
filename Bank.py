@@ -33,12 +33,14 @@ class Account:
 
 class SavingsAccount:
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
+        super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
         self.currentBalance = currentBalance
-        self.minimumBalance = minimumBalance 
+        self.minimumBalance = minimumBalance
     def withdraw(self, amount):
         self.currentBalance = amount
         self.currentBalance -= amount
-
+  
+        
         if self.currentBalance < self.minimumBalance:
             print('Unable to widthdraw amount')
             self.currentBalance += amount
@@ -51,6 +53,7 @@ class SavingsAccount:
 
 class ChecquingAccount:
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftAllowed):
+            super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance)
             self.currentBalance = currentBalance
             self.overdraftAllowed = overdraftAllowed
     def withdraw(self, amount):
@@ -69,12 +72,19 @@ class ChecquingAccount:
 
 
 class Bank:
-    def __init__(self, bankName):
+    def __init__(self, bankName, account):
         self.bankName = bankName 
         self.accounts = []
+        self.account = account
 
-    def openAccount(self, account):
-        self.accounts.append(account)
+    def openChequingAccount(self, bankName, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftAllowed):
+        super().__init__(bankName, accountNumber, accountHolderName, rateOfInterest, currentBalance, overdraftAllowed)
+        self.accounts.append(self.account)
+        print(f'Your new bank account {Account.getAccountNumber()} has been opened!')
+
+    def openSavingsAccount(self, bankName, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
+        super().__init__(bankName, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance)
+        self.accounts.append(self.account)
         print(f'Your new bank account {Account.getAccountNumber()} has been opened!')
 
     def searchAccount(self, accountNumber):
