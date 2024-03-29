@@ -26,13 +26,6 @@ class Account:
         else:
             print('Invalid deposit amount')
 
-    def withdraw(self, amount):
-        if amount > 0 and amount <= self.currentBalance:
-            self.currentBalance -= amount
-            print(f'Withdrawal successful, Your new balance is: {self.currentBalance}.')
-        else:
-            print('Invalid withdrawal amount')
-
 class SavingsAccount(Account):
     def __init__(self, accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance):
         super().__init__(accountNumber, accountHolderName, rateOfInterest, currentBalance, minimumBalance, 0)

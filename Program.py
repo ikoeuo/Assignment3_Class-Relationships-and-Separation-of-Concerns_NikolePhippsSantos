@@ -20,7 +20,6 @@ def run():
     account4 = ChequingAccount(4040, 'Finn Santos', 0.25, 1330, -100)
     bank.accounts.append(account1)
 
-
     while True:
         showMainMenu()
         option = int(input('Enter choice (1-3): '))
@@ -49,16 +48,17 @@ def run():
                 while True:
                     showAccountMenu()
                     accountOption = int(input('Enter selection (1-4): '))
+                    
 
                     if accountOption == 1: #Check Balance
-                        print('Your current balance is:', account.getCurrentBalance())
+                        print('\nYour current balance is:', account.getCurrentBalance())
 
                     elif accountOption == 2: #2. Deposit
-                        amount = float(input('How much money would you like to deposit? '))
+                        amount = float(input('\nHow much money would you like to deposit? '))
                         account.deposit(amount)
 
                     elif accountOption == 3: #3. Withdraw
-                        amount = float(input('How much money would you like to withdraw? '))
+                        amount = float(input('\nHow much money would you like to withdraw? '))
                         account.withdraw(amount)
 
                     elif accountOption == 4: #4. Exit Account to Main Menu
